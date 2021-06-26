@@ -1,0 +1,6 @@
+{
+  "systems": [{
+    "alias": "MockServer",
+    "uri": "https://odata-mock-server-forgiving-hartebeest.cfapps.eu10.hana.ondemand.com"
+  }]
+}
