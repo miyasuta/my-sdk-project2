@@ -19,9 +19,7 @@
 
 ### General project setup
 general:
-  productiveBranch: 'master'
-  projectName: 'my-sdk-project'
-  inferBuildTool: true
+  buildTool: 'npm'
 
 ### Step-specific configuration
 steps:
