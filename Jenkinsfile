@@ -20,23 +20,31 @@
 pipeline {
     agent any
 
-    stages() {
+    stages {
         stage('Prepare')   {
-            deleteDir()
-            checkout scm
-            setupCommonPipelineEnvironment script:this
+            steps {
+                deleteDir()
+                checkout scm
+                setupCommonPipelineEnvironment script:this
+            }
         }
 
         stage('Build')   {
-            buildExecute script:this, npmRunScripts:['ci-build', 'ci-package']
+            steps {
+                buildExecute script:this, npmRunScripts:['ci-build', 'ci-package']
+            }            
         }
 
         stage('Integration') {
-            npmExecuteScripts script:this, runScripts:['ci-integration-test']
+            steps {
+                npmExecuteScripts script:this, runScripts:['ci-integration-test']
+            }
         }
 
         stage('Deploy')   {
-            cloudFoundryDeploy script:this, deployTool: 'cf_native', manifest: 'manifest.yml'
+            steps {
+                cloudFoundryDeploy script:this, deployTool: 'cf_native', manifest: 'manifest.yml'
+            }
         }
     }
     post {
