@@ -45,12 +45,7 @@ describe('BusinessPartnerController (e2e)', () => {
   it('/business-partner (GET)', () => {
     return request(app.getHttpServer())
       .get('/business-partner')
-      .expect(200)
+      .expect(201)
       .expect(mockBusinessPartners);
   });
-      // .then((response) => {
-      //   assert(response.body[0].businessPartner, "1003764")
-      //   done();
-      // })
-      // .catch(err => done(err))
 });
