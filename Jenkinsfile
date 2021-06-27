@@ -16,24 +16,3 @@
  * To find out about available versions and release notes, visit: https://github.com/SAP/cloud-s4-sdk-pipeline/releases
  */
 @Library('piper-lib-os') _
-
-node(){
-  stage('Prepare')   {
-      deleteDir()
-      checkout scm
-      setupCommonPipelineEnvironment script:this
-  }
-
-  stage('Build')   {
-    buildExecute script:this, npmRunScripts:['ci-build', 'ci-package']
-  }
-
-  stage('Integration') {
-    npmExecuteScripts script:this, runScripts:['ci-integration-test']
-    testsPublishResults script: this, junit:[pattern: '**/backend-integration/*.xml', updateResults: true, archive: true]
-  }
-
-  stage('Deploy')   {
-      cloudFoundryDeploy script:this, deployTool: 'cf_native', manifest: 'manifest.yml'
-  }
-}
