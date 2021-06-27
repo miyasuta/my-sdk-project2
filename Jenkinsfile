@@ -17,7 +17,9 @@
  */
 @Library('piper-lib-os') _
 
-node(){
+pipeline {
+    agent any
+
     stages() {
         stage('Prepare')   {
             deleteDir()
@@ -42,5 +44,4 @@ node(){
             testsPublishResults script: this, junit:[pattern: '**/backend-integration/*.xml', updateResults: true, archive: true]
         }
     }
-
 }
