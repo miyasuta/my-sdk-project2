@@ -34,6 +34,6 @@ node(){
   }
 
   stage('Deploy')   {
-      cloudFoundryDeploy script:this, deployTool: 'cf_native'
+      cloudFoundryDeploy script:this, deployTool: 'cf_native', manifest: 'manifest.yml'
   }
 }
